@@ -25,7 +25,7 @@
                         <div><span class="font-semibold">Studio</span> : {{ $anime->studio ?? '-' }}</div>
                     </div>
 
-                    
+
                     <p class="text-gray-200">
                         <span class="font-semibold">Genre:</span> {{ $anime->genre ?? '-' }}
                     </p>
@@ -48,6 +48,23 @@
                             </div>
                         </div>
                     @endif
+
+                    @if($anime->trailer)
+                        @php
+                            // Ambil kode video dari link YouTube
+                            preg_match('/v=([^\&]+)/', $anime->trailer->youtube_url, $match);
+                            $videoId = $match[1] ?? null;
+                        @endphp
+
+                        @if($videoId)
+                            <div class="my-4">
+                                <iframe width="650" height="315" src="https://www.youtube.com/embed/{{ $videoId }}"
+                                    title="YouTube video player" frameborder="0" allowfullscreen
+                                    class="rounded-xl shadow-lg aspect-video"></iframe>
+                            </div>
+                        @endif
+                    @endif
+
 
 
                     @if($anime->streaming_url)

@@ -36,4 +36,9 @@ class Anime extends Model
     {
         return $this->belongsTo(Source::class);
     }
+
+    public function trailer()
+    {
+        return $this->hasOne(Trailer::class);
+    }
 }
